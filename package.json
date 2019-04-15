@@ -1,0 +1,28 @@
+{
+  "name": "news-app",
+  "version": "1.0.0",
+  "description": "An application that will scrape a website and produce articles from it",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrickittyFrack/news-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FrickittyFrack/news-app/issues"
+  },
+  "homepage": "https://github.com/FrickittyFrack/news-app#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "mongoose": "^5.5.1",
+    "morgan": "^1.9.1"
+  }
+}
