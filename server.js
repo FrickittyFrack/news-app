@@ -6,16 +6,6 @@ var logger = require("morgan");
 
 var PORT = process.env.PORT || 3000;
 
-var cheerio = require("cheerio");
-var axios = require("axios");
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-mongoose.connect(MONGODB_URI);
-
-// Require all models
-var db = require("./models");
-
 var PORT = 3000;
 
 // Initialize Express
@@ -31,29 +21,10 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public/"));
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
-
-//axios
-
-app.get("/", function(req, res) {
-    axios.get("https://www.pcgamer.com/news/").then(function(response) {
-        var $ = cheerio.load(response.data);
-        var results = [];
-        $(".listingResult").each(function(i, element) {
-            var title = $(element).find(".article-name").text();
-            var link = $(element).find("a").attr("href");
-
-            results.push({
-                title: title,
-                link: link
-            });
-        });
-        console.log(results);
-        res.render("index");
-    });
-});
-
+mongoose.connect(MONGODB_URI);
 
 // Handlebars
 app.engine(
@@ -65,8 +36,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-// require("./routes/apiRoutes")(app);
-// require("./routes/htmlRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 // Start the server
 app.listen(PORT, function() {
